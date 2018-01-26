@@ -38,12 +38,12 @@
                     break;
 
                 case _states.enabled:
-                    GLANCETRACKERAPI.set_pause(false);
+                    GLANCETRACKERAPI.toggle_pause(true);
                     _state=_states.disabled;
                     break;
 
                 case _states.disabled:
-                    GLANCETRACKERAPI.set_pause(true);
+                    GLANCETRACKERAPI.toggle_pause(false);
                     _state=_states.enabled;
                     break;
             }
@@ -68,9 +68,7 @@
                     buttonText='Disable glance tracking';
                     break;
             }
-            debugger;
             DOMbutton.innerHTML=buttonText;
-            
         }; //end update_button()
 
         function init_glanceTracking(){
