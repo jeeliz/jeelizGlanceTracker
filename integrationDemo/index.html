@@ -119,8 +119,10 @@
             }
 
             #glanceTrackerCanvasContainer {
+                border: 1px solid white;
                 z-index: 10;
                 position: fixed; 
+                max-width: 25%;
                 bottom: 0px;
                 right: 0px;
                 opacity: 1;
@@ -129,8 +131,7 @@
                 transform-origin: bottom right;
             }
 
-            #glanceTrackerCanvas {
-                
+            #glanceTrackerCanvas {   
             }
 
             #jeeVideo {
@@ -152,7 +153,10 @@
         
         <button onclick='toggle_glanceTracking(event)' id='toggleGlanceTracking'></button><br/>
 
-        <video autoplay loop id='jeeVideo' controls src='video.ogv'></video>
+        <video autoplay loop id='jeeVideo' controls>
+          <source src="video.mp4" type="video/mp4" />
+          <source src="video.ogv" type="video/ogg" />
+        </video>
 
         <br/><div class='credits'>
         <h2>Credits</h2>
