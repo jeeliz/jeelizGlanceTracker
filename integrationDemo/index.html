@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="en-EN" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>GLANCE TRACKER - INTEGRATION DEMO</title>
+        
+        <!-- WE INCLUDE THE MAIN SCRIPT -->
+        <script type="text/javascript" src="https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js"></script>
+
+        <script type='text/javascript'>
+
+        "use strict"
+        var _states={
+            idle: 0,
+            loading: 1,
+            enabled: 2,
+            disabled: 3
+        };
+        var _state=_states.idle;
+
+        function toggle_canvasContainer(isShow){
+            var DOMcanvasContainer=document.getElementById('glanceTrackerCanvasContainer');
+            if (!DOMcanvasContainer) return;
+            DOMcanvasContainer.style.opacity=(isShow)?'1':'0';
+        };
+
+        function toggle_glanceTracking(event){ //the user clic on the button
+            var DOMbutton=event.target;
+            switch(_state){
+                case _states.idle:
+                    init_glanceTracking();
+                    break;
+
+                case _states.loading:
+                    break;
+
+                case _states.enabled:
+                    GLANCETRACKERAPI.set_pause(false);
+                    _state=_states.disabled;
+                    break;
+
+                case _states.disabled:
+                    GLANCETRACKERAPI.set_pause(true);
+                    _state=_states.enabled;
+                    break;
+            }
+            update_button();
+        }; //end toggle_glanceTracking()
+
+        function update_button(){
+            var DOMbutton=document.getElementById('toggleGlanceTracking');
+            var buttonText;
+            
+            switch(_state){
+                case _states.idle:
+                case _states.disabled:
+                    buttonText='Enable glance tracking';
+                    break;
+
+                case _states.loading:
+                    buttonText='LOADING...';
+                    break;
+
+                case _states.enabled:
+                    buttonText='Disable glance tracking';
+                    break;
+            }
+            debugger;
+            DOMbutton.innerHTML=buttonText;
+            
+        }; //end update_button()
+
+        function init_glanceTracking(){
+            _state=_states.loading;
+            GLANCETRACKERAPI.init({
+                callbackTrack: function(isDetected){
+                    console.log('DETECTION changed ! isDetected = ', isDetected);
+                    var DOMvideo=document.getElementById('jeeVideo');
+                    if (!DOMvideo) return;
+                    if (isDetected){
+                        DOMvideo.play();
+                        toggle_canvasContainer(false);
+                    } else {
+                        DOMvideo.pause();
+                        toggle_canvasContainer(true);
+                    }
+                },
+
+                callbackReady: function(error){
+                    if (error){
+                        alert('AN ERROR HAPPENS :( CODE ='+error);
+                        return;
+                    }
+                    console.log('GLANCETRACKERAPI is READY YEAH !');
+                    toggle_canvasContainer(true);
+                    _state=_states.enabled;
+                    update_button();
+                },
+
+                isDisplayVideo: true,
+                canvasId: 'glanceTrackerCanvas',
+                NNCpath: 'https://appstatic.jeeliz.com/glanceTracker/' //where is NNC.json ?
+            }); //end GLANCETRACKERAPI.init call
+        }; //end init()
+
+        </script>
+
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+        <style type='text/css'>
+            a {color: #7af; text-decoration: none; font-weight: bold}
+            a:hover {color: white;}
+            body {background-color: black; margin: 0px; text-align: center; font-family: "Open Sans";}
+            button {
+                cursor: pointer;
+                font-size: 12pt;
+                width: 300px;
+                margin: 1em;
+            }
+
+            #glanceTrackerCanvasContainer {
+                z-index: 10;
+                position: fixed; 
+                bottom: 0px;
+                right: 0px;
+                opacity: 1;
+                transition-duration: 1000ms;
+                transform: scale(0.5,0.5);
+                transform-origin: bottom right;
+            }
+
+            #glanceTrackerCanvas {
+                
+            }
+
+            #jeeVideo {
+            }
+
+            .credits {
+                max-width: 640px;
+                text-align: left;
+                display: inline-block;
+            }
+            
+        </style>
+    </head>
+
+
+    <body onload='update_button()' style='color: white'>
+
+        <h1>Jeeliz Glance Tracker integration demo</h1>
+        
+        <button onclick='toggle_glanceTracking(event)' id='toggleGlanceTracking'></button><br/>
+
+        <video autoplay loop id='jeeVideo' controls src='video.ogv'></video>
+
+        <br/><div class='credits'>
+        <h2>Credits</h2>
+        <ul>
+            <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
+            <li>Github of the project : <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
+            <li>Video used for this demo : Big Buck Bunny by the <a href='https://www.blender.org' target='_blank'>Blender Foundation</a>
+        </ul>
+        </div>
+
+        <div id='glanceTrackerCanvasContainer'>
+            Tracking your glance ...
+            <canvas id='glanceTrackerCanvas'></canvas>
+        </div>
+
+    </body>
+</html>
+
