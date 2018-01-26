@@ -2,7 +2,7 @@
 
 This library detects if the user is looking at the screen or not. Great for play/pause videos !
 
-You can test it on https://jeeliz.com/glanceTracker/
+You can test it on [jeeliz.com/demo/glanceTracker/](https://jeeliz.com/demo/glanceTracker/)
 
 
 ## Integration
@@ -10,18 +10,16 @@ On your HTML page, you first need to include the main script between the tags `<
 ```
  <script type="text/javascript" src="dist/jeelizGlanceTracker.js"></script>
 ```
-This script loads the neural network JSON data using AJAX. So the file `dist/NNC.json` should be in the same path than `jeelizGlanceTracker.js`.
-
 Then you should include a `CANVAS` HTML element in the DOM, between the tags `<body>` and `</body>` :
 ```
 <canvas id='glanceTrackerCanvas'></canvas>
 ```
 This canvas will be used by WebGL for the computation and the display of the video. It can be hidden.
-Then when your page is loaded or when you want to enable the glance tracking feature you should launch this function :
+When your page is loaded or when you want to enable the glance tracking feature you should launch this function :
 ```
 GLANCETRACKERAPI.init({
-	// MANDATORY :
-	// callback launched when :
+    // MANDATORY :
+    // callback launched when :
     //  * the user is watching (isWatching=true) 
     //  * or when he stops watching (isWatching=false)
     // it can be used to play/pause a video
@@ -93,7 +91,7 @@ You should use them after initialization, ie :
 
 ## Hosting
 ### HTTPS only !
-Because the tracker requires the user's camera through `MediaStream API`, you application should be served through HTTPS (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally.
+Because the tracker requires the user's webcam stream through `MediaStream API`, your application should be served through HTTPS (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally.
 
 ### The scripts
 You can use our hosted and up to date version of the library, available here :
@@ -101,7 +99,7 @@ You can use our hosted and up to date version of the library, available here :
 https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js
 ```
 It is served through a content delivery network (CDN) using gzip compression.
-If you host the scripts by yourself, be careful to enable gzip HTTP/HTTPS compression for JSON files. Indeed, the neuron network JSON file, `dist/NNC.json` is quite heavy, but very well compressed with GZIP. You can check the gzip compression [here](https://checkgzipcompression.com/).
+If you host the scripts by yourself, be careful to enable gzip HTTP/HTTPS compression for JSON files. Indeed, the neuron network JSON file, `dist/NNC.json` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
 
 
 
