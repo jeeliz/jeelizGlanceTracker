@@ -79,11 +79,11 @@ In the path `/integrationSample`, you will find an integration sample. Just serv
 ## Other methods
 After the initialization, these methods are available :
 
-* GLANCETRACKERAPI.set_sensibility(<float> sensibility) : adjust the sensibility (between 0 and 1),
+* `GLANCETRACKERAPI.set_sensibility(<float> sensibility)` : adjust the sensibility (between 0 and 1),
 
-* GLANCETRACKERAPI.toggle_pause(<boolean> isPause) : pause/restart the face tracking,
+* `GLANCETRACKERAPI.toggle_pause(<boolean> isPause)` : pause/restart the face tracking,
 
-* GLANCETRACKERAPI.toggle_display(<boolean> isDisplay) : toggle the display of the video with the face detection area on the HTML `<canvas>` element. It is better to disable the display if the canvas element is hidden (using CSS for example). It will save some GPU resources.
+* `GLANCETRACKERAPI.toggle_display(<boolean> isDisplay)` : toggle the display of the video with the face detection area on the HTML `<canvas>` element. It is better to disable the display if the canvas element is hidden (using CSS for example). It will save some GPU resources.
 
 
 You should use them after initialization, ie :
