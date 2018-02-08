@@ -2,7 +2,10 @@
 
 This library detects if the user is looking at the screen or not. Great for play/pause videos !
 
-You can test it on [jeeliz.com/demos/glanceTracker/](https://jeeliz.com/demos/glanceTracker/)
+You can test it with these demos (included in this repo) :
+* [Simple integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemo2)
+* [Youtube integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemoYoutube)
+* [Old and ugly integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemo)
 
 
 ## Integration
