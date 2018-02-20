@@ -73,7 +73,7 @@ GLANCETRACKERAPI.init({
 
 
 ## Integration sample
-In the path `/integrationSample`, you will find an integration sample. Just serve it through a HTTPS server.
+In the paths `/integrationDemo*`, you will find several integration samples. Just serve them through a HTTPS server.
 
 
 ## Other methods
@@ -102,7 +102,7 @@ You can use our hosted and up to date version of the library, available here :
 https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js
 ```
 It is served through a content delivery network (CDN) using gzip compression.
-If you host the scripts by yourself, be careful to enable gzip HTTP/HTTPS compression for JSON files. Indeed, the neuron network JSON file, `dist/NNC.json` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
+If you host the scripts by yourself, be careful to enable gzip HTTP/HTTPS compression for .JSON and .JS files. Indeed, the neuron network JSON file, `dist/NNC.json` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
 
 
 
