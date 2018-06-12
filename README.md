@@ -10,7 +10,7 @@ You can test it with these demos (included in this repo) :
 If you do not have a webcam yet, this is a video screenshot of the *Youtube integration demo* :
 
 <p align="center">
-[![Youtube integration demo](https://img.youtube.com/vi/2FWcsA8QrHU/0.jpg)](https://www.youtube.com/watch?v=2FWcsA8QrHU)
+<a href='https://www.youtube.com/watch?v=2FWcsA8QrHU'><img src='https://img.youtube.com/vi/2FWcsA8QrHU/0.jpg'></a>
 </p>
 
 ## Integration
