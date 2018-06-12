@@ -9,8 +9,9 @@ You can test it with these demos (included in this repo) :
 
 If you do not have a webcam yet, this is a video screenshot of the *Youtube integration demo* :
 
+<p align="center">
 [![Youtube integration demo](https://img.youtube.com/vi/2FWcsA8QrHU/0.jpg)](https://www.youtube.com/watch?v=2FWcsA8QrHU)
-
+</p>
 
 ## Integration
 In the HTML page, you first need to include the main script between the tags `<head>` and `</head>` :
