@@ -1,24 +1,27 @@
 # jeelizGlanceTracker
 
-This library detects if the user is looking at the screen or not. Great for play/pause videos !
+This JavaScript/WebGL library detects if the user is looking at the screen or not. It is very robust to all lighting conditions and lightweight (only 150KB gzipped for the main script and the neural network JSON model). It is great for playing a video only if the user is watching it.
 
 You can test it with these demos (included in this repo) :
 * [Simple integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemo2)
 * [Youtube integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemoYoutube)
 * [Old and ugly integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemo)
 
+If you do not have a webcam yet, this is a video screenshot of the *Youtube integration demo* :
+[![Youtube integration demo](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=2FWcsA8QrHU)
+
 
 ## Integration
-On your HTML page, you first need to include the main script between the tags `<head>` and `</head>` :
+In the HTML page, you first need to include the main script between the tags `<head>` and `</head>` :
 ```
  <script type="text/javascript" src="dist/jeelizGlanceTracker.js"></script>
 ```
-Then you should include a `CANVAS` HTML element in the DOM, between the tags `<body>` and `</body>` :
+Then you should include a `<canvas>` HTML element in the DOM, between the tags `<body>` and `</body>` :
 ```
 <canvas id='glanceTrackerCanvas'></canvas>
 ```
-This canvas will be used by WebGL for the computation and the display of the video. It can be hidden.
-When your page is loaded or when you want to enable the glance tracking feature you should launch this function :
+This canvas will be used by WebGL for the computation and the display of the webcam video with the face detection frame. It can be hidden using CSS rules.
+As soon as the page is loaded or when you want to enable the glance tracking feature you should call this function :
 ```
 GLANCETRACKERAPI.init({
     // MANDATORY :
@@ -68,12 +71,12 @@ GLANCETRACKERAPI.init({
     // and ending by /
     // for example ../../
     NNCpath: '/path/of/NNC.json'
-}
+});
 ```
 
 
-## Integration sample
-In the paths `/integrationDemo*`, you will find several integration samples. Just serve them through a HTTPS server.
+## Integration examples
+In the paths `/integrationDemo*`, there are several integration examples. You can host them through a static HTTPS server.
 
 
 ## Other methods
@@ -94,19 +97,50 @@ You should use them after initialization, ie :
 
 ## Hosting
 ### HTTPS only !
-Because the tracker requires the user's webcam stream through `MediaStream API`, your application should be served through HTTPS (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally.
+The tracker requires the user's webcam video feed through `MediaStream API`. So your application should be hosted with a HTTPS server (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally with some web browsers.
 
 ### The scripts
 You can use our hosted and up to date version of the library, available here :
 ```
 https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js
 ```
-It is served through a content delivery network (CDN) using gzip compression.
+It is hosted on a content delivery network (CDN) using gzip compression.
 If you host the scripts by yourself, be careful to enable gzip HTTP/HTTPS compression for .JSON and .JS files. Indeed, the neuron network JSON file, `dist/NNC.json` is quite heavy, but very well compressed with GZIP. You can check the gzip compression of your server [here](https://checkgzipcompression.com/).
+
+
+
+## About the tech
+### Under the hood
+This API uses Jeeliz WebGL Deep Learning technology to detect and track the user's face using a neural network. All is done client-side.
+
+### Compatibility
+* If `WebGL2` is available, it uses `WebGL2` and no specific extension is required,
+* If `WebGL2` is not available but `WebGL1`, we require either `OES_TEXTURE_FLOAT` extension or `OES_TEXTURE_HALF_FLOAT` extension,
+* If `WebGL2` is not available, and if `WebGL1` is not available or neither `OES_TEXTURE_FLOAT` or `OES_HALF_TEXTURE_FLOAT` are implemented, the user is not compatible.
+
+In all cases, WebRTC should be implemented in the web browser, otherwise FaceFilter API will not be able to get the webcam video feed. Here are the compatibility tables from [caniuse.com](https://caniuse.com/) here: [WebGL1](https://caniuse.com/#feat=webgl), [WebGL2](https://caniuse.com/#feat=webgl2), [WebRTC](https://caniuse.com/#feat=stream).
+
+If a compatibility error is triggered, please post an issue on this repository. If this is a problem with the webcam access, please first retry after closing all applications which could use your device (Skype, Messenger, other browser tabs and windows, ...). Please include :
+* a screenshot of [webglreport.com - WebGL1](http://webglreport.com/?v=1) (about your `WebGL1` implementation),
+* a screenshot of [webglreport.com - WebGL2](http://webglreport.com/?v=2) (about your `WebGL2` implementation),
+* the log from the web console,
+* the steps to reproduce the bug, and screenshots.
 
 
 
 ## License
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). This application is free for both commercial and non-commercial use.
 
-We appreciate attribution by including the Jeeliz logo and link to the [Jeeliz website](https://jeeliz.com) in your application.
+We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great.
+
+
+
+## See also
+Jeeliz main face detection and tracking library is called [Jeeliz FaceFilter API](https://github.com/jeeliz/jeelizFaceFilter). It handles multi-face detection, and for each tracked face it provides the rotation angles and the mouth opening factor. It is perfect to build your own Snapchat/MSQRD like face filters running in the browser. It comes with dozen of integration demo, including a face swap.
+
+If you want to use this library for glasses virtual try-on (sunglasses, spectacles, ski masks), you can take a look at [Jeeliz VTO widget](https://github.com/jeeliz/jeelizGlassesVTOWidget). It includes a high quality and lightweight 3D engine which implements the following features: deferred shading, PBR, raytraced shadows, normal mapping, ... It also reconstructs the lighting environment around the user (ambient and directional lighting). But the glasses comes from a database hosted in our servers. If you want to add some models, please contact us.
+
+
+
+## References
+* [Jeeliz official website](https://jeeliz.com)
