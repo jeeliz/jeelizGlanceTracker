@@ -8,7 +8,8 @@ You can test it with these demos (included in this repo) :
 * [Old and ugly integration demo](https://jeeliz.com/demos/glanceTracker/integrationDemo)
 
 If you do not have a webcam yet, this is a video screenshot of the *Youtube integration demo* :
-[![Youtube integration demo](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=2FWcsA8QrHU)
+
+[![Youtube integration demo](https://img.youtube.com/vi/2FWcsA8QrHU/0.jpg)](https://www.youtube.com/watch?v=2FWcsA8QrHU)
 
 
 ## Integration
