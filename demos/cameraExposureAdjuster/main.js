@@ -67,7 +67,7 @@ function init_glanceTracking(){
 function init_exposureController(spec){
     //enable mipmapping of glVideoTextureCut (required by the exposure controller)!
     _gl=spec.GL;
-    const isWebGL2=_gl instanceof(WebGL2RenderingContext);
+    const isWebGL2=typeof(WebGL2RenderingContext)!=='undefined' && _gl instanceof(WebGL2RenderingContext);
     _glVideoTextureCut=spec.videoTextureCut;
     _glVideoTexture=spec.videoTexture;
     
