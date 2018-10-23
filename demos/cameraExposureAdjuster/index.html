@@ -19,7 +19,7 @@
         <style type='text/css'>
             body {
                 font-size: 12pt;
-                background-color: silver;
+                background-color: #eee;
                 margin: 0px;
                 text-align: center;
             }
@@ -42,7 +42,7 @@
 
         <div class='content'>
             <p>
-            You have an important video conference? Come here, it will automatically adjust your webcam! It is particularly efficient when:
+            You have an important video conference? Come here and your webcam will be automatically adjusted! It is particularly efficient when:
             </p>
             <ul>
                 <li>There is a strong backlight so your face is hidden in the shadow,
@@ -53,7 +53,12 @@
         <canvas id='glanceTrackerCanvas' height='512' width='512'></canvas>
 
         <br/><div class='content'>
-        When the face is not detected, the exposure changes following a sinusoïd. As soon as your face is detected, the exposure is tuned so that the average luminosity of your face is 50%. After ajusting the luminosity, you can exit this page.
+            <p>
+            When the face is not detected, the exposure changes following a sinusoïd. As soon as your face is detected, the exposure is tuned so that the average luminosity of your face is 50%. After ajusting the luminosity, you can exit this page.
+            </p>
+            <p>
+            This demo requires <i>Image Capture API</i> in order to adjust the camera exposure. It is currently implemented in <i>Google Chrome</i> web browser. You can check the compatibility table here: <a href='https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture#Browser_compatibility' target='_blank'>developer.mozilla.org/en-US/docs/Web/API/ImageCapture</a>.
+            </p>
         </div>
         
     </body>
