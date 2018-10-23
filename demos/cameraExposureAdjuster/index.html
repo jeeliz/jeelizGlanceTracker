@@ -29,7 +29,7 @@
             }
 
             .content {
-                max-width: 600px; display: inline-block; text-align: left
+                max-width: 640px; display: inline-block; text-align: left
             }
             
         </style>
@@ -57,7 +57,10 @@
             When the face is not detected, the exposure changes following a sinusoïd. As soon as your face is detected, the exposure is tuned so that the average luminosity of your face is 50%. After ajusting the luminosity, you can exit this page.
             </p>
             <p>
-            This demo requires <i>Image Capture API</i> in order to adjust the camera exposure. It is currently implemented in <i>Google Chrome</i> web browser. You can check the compatibility table here: <a href='https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture#Browser_compatibility' target='_blank'>developer.mozilla.org/en-US/docs/Web/API/ImageCapture</a>.
+            This demo requires <i>Image Capture API</i> in order to adjust the camera exposure. It is currently implemented in <i>Google Chrome</i> web browser. You can check the compatibility table here: <a href='https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture#Browser_compatibility' target='_blank'>developer.mozilla.org/en-US/docs/Web/API/ImageCapture</a>. It is also necessary that the camera drivers allow to change the exposure (this is not possible on some cheap webcams). If it does not work on your computer, you can still check the <a href='https://www.youtube.com/watch?v=G-Q4kRqxsTU' target='_blank'>Youtube screenshot video</a>.
+            </p>
+            <p>
+            The exposure is changed using <a href='https://github.com/jeeliz/jeelizExposureController' target='_blank'>Jeeliz Exposure Controller</a>.
             </p>
         </div>
         
