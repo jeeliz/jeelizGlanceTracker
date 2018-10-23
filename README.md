@@ -103,10 +103,6 @@ GLANCETRACKERAPI.init({
 ```
 
 
-## Integration examples
-In the paths `/integrationDemo*`, there are several integration examples. You can host them through a static HTTPS server.
-
-
 ## Other methods
 After the initialization, these methods are available:
 
