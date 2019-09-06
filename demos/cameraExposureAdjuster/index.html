@@ -1,69 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="content-language" content="en-EN" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-language" content="en-EN" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>CAMERA EXPOSURE ADJUSTER</title>
-        
-        <!-- WE INCLUDE THE MAIN SCRIPT -->
-        <script src="../../dist/jeelizGlanceTracker.js"></script>
+    <title>CAMERA EXPOSURE ADJUSTER</title>
+    
+    <!-- WE INCLUDE THE MAIN SCRIPT -->
+    <script src="../../dist/jeelizGlanceTracker.js"></script>
 
-        <!-- INCLUDE JEELIZ EXPOSURE CONTROLLER -->
-        <script src="../../libs/jeelizExposureController/JeelizExposureController.js"></script>
+    <!-- INCLUDE JEELIZ EXPOSURE CONTROLLER -->
+    <script src="../../libs/jeelizExposureController/JeelizExposureController.js"></script>
 
-        <!-- INCLUDE DEMO SCRIPT -->
-        <script src="main.js"></script>
+    <!-- INCLUDE DEMO SCRIPT -->
+    <script src="main.js"></script>
 
-        <style type='text/css'>
-            body {
-                font-size: 12pt;
-                background-color: #eee;
-                margin: 0px;
-                text-align: center;
-            }
-            
-            #glanceTrackerCanvas {  
-               /* max-width: 25vmin; */
-            }
+    <style type='text/css'>
+      body {
+        font-size: 12pt;
+        background-color: #eee;
+        margin: 0px;
+        text-align: center;
+      }
+      
+      #glanceTrackerCanvas {  
+         /* max-width: 25vmin; */
+      }
 
-            .content {
-                max-width: 640px; display: inline-block; text-align: left
-            }
-            
-        </style>
-    </head>
+      .content {
+        max-width: 640px; display: inline-block; text-align: left
+      }
+      
+    </style>
+  </head>
 
 
-    <body onload='main()'>
+  <body onload='main()'>
 
-        <h1>Jeeliz Camera Exposure Adjuster</h1>
+    <h1>Jeeliz Camera Exposure Adjuster</h1>
 
-        <div class='content'>
-            <p>
-            You have an important video conference? Come here and your webcam will be automatically adjusted! It is particularly efficient when:
-            </p>
-            <ul>
-                <li>There is a strong backlight so your face is hidden in the shadow,
-                <li>The ambient luminosity of the room is too low.
-            </ul>
-        </div><br/>
-        
-        <canvas id='glanceTrackerCanvas' height='512' width='512'></canvas>
+    <div class='content'>
+      <p>
+      You have an important video conference? Come here and your webcam will be automatically adjusted! It is particularly efficient when:
+      </p>
+      <ul>
+        <li>There is a strong backlight so your face is hidden in the shadow,
+        <li>The ambient luminosity of the room is too low.
+      </ul>
+    </div><br/>
+    
+    <canvas id='glanceTrackerCanvas' height='512' width='512'></canvas>
 
-        <br/><div class='content'>
-            <p>
-            When the face is not detected, the exposure changes following a sinusoïd. As soon as your face is detected, the exposure is tuned so that the average luminosity of your face is 50%. After ajusting the luminosity, you can exit this page.
-            </p>
-            <p>
-            This demo requires <i>Image Capture API</i> in order to adjust the camera exposure. It is currently implemented in <i>Google Chrome</i> web browser. You can check the compatibility table here: <a href='https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture#Browser_compatibility' target='_blank'>developer.mozilla.org/en-US/docs/Web/API/ImageCapture</a>. It is also necessary that the camera drivers allow to change the exposure (this is not possible on some cheap webcams). If it does not work on your computer, you can still check the <a href='https://www.youtube.com/watch?v=G-Q4kRqxsTU' target='_blank'>Youtube screenshot video</a>.
-            </p>
-            <p>
-            The exposure is changed using <a href='https://github.com/jeeliz/jeelizExposureController' target='_blank'>Jeeliz Exposure Controller</a>.
-            </p>
-        </div>
-        
-    </body>
+    <br/><div class='content'>
+      <p>
+      When the face is not detected, the exposure changes following a sinusoïd. As soon as your face is detected, the exposure is tuned so that the average luminosity of your face is 50%. After ajusting the luminosity, you can exit this page.
+      </p>
+      <p>
+      This demo requires <i>Image Capture API</i> in order to adjust the camera exposure. It is currently implemented in <i>Google Chrome</i> web browser. You can check the compatibility table here: <a href='https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture#Browser_compatibility' target='_blank'>developer.mozilla.org/en-US/docs/Web/API/ImageCapture</a>. It is also necessary that the camera drivers allow to change the exposure (this is not possible on some cheap webcams). If it does not work on your computer, you can still check the <a href='https://www.youtube.com/watch?v=G-Q4kRqxsTU' target='_blank'>Youtube screenshot video</a>.
+      </p>
+      <p>
+      The exposure is changed using <a href='https://github.com/jeeliz/jeelizExposureController' target='_blank'>Jeeliz Exposure Controller</a>.
+      </p>
+    </div>
+    
+  </body>
 </html>
 

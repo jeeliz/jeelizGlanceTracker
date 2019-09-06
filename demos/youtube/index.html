@@ -1,392 +1,390 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="en-EN" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-EN" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>GLANCE TRACKER - INTEGRATION DEMO Youtube</title>
-        
-        <!-- WE INCLUDE THE MAIN SCRIPT -->
-        <script type="text/javascript" src="https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78159065-6"></script>
-        <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
+    <title>GLANCE TRACKER - INTEGRATION DEMO Youtube</title>
+    
+    <!-- WE INCLUDE THE MAIN SCRIPT -->
+    <script src="https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78159065-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-78159065-6');
+    </script>
+    <script>
 
-         gtag('config', 'UA-78159065-6');
-        </script>
-        <script type='text/javascript'>
+    "use strict"
 
-        "use strict"
-        let isYoutube = true
+    let isYoutube = true
 
-        let youtubePlayer
+    let youtubePlayer
 
-        const loadYoutubePlayer = () => {
-            const tag = document.createElement('script');
+    const loadYoutubePlayer = () => {
+      const tag = document.createElement('script');
 
-            tag.src = 'https://www.youtube.com/iframe_api'
-            const firstScriptTag = document.getElementsByTagName('script')[0]
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+      tag.src = 'https://www.youtube.com/iframe_api'
+      const firstScriptTag = document.getElementsByTagName('script')[0]
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    }
+    loadYoutubePlayer()
+
+    function onYouTubeIframeAPIReady() {
+      youtubePlayer = new YT.Player('player', {
+        height: '360',
+        width: '540',
+        videoId: 'aEzZLXBH3rU',
+        events: {
+        'onReady': onPlayerReady
         }
-        loadYoutubePlayer()
+      }) 
+    }
+    const onPlayerReady = (event) => {
+      event.target.playVideo()
+    }
 
-        function onYouTubeIframeAPIReady() {
-            youtubePlayer = new YT.Player('player', {
-              height: '360',
-              width: '540',
-              videoId: 'aEzZLXBH3rU',
-              events: {
-                'onReady': onPlayerReady
-              }
-            }) 
+    const resumeVideo = () => {
+      youtubePlayer.playVideo()     
+    }
+
+    const pauseVideo = () => {
+      youtubePlayer.pauseVideo()
+    }
+
+    const loadVideo = (id) => {
+      youtubePlayer.loadVideoById(id)
+    }
+
+    const searchYoutube = (loadFirst) => {
+      const query = document.getElementById('query').value
+      const urlFormatted = encodeURI(`https://www.googleapis.com/youtube/v3/search?q=${query}&maxResults=25&part=snippet`)
+      const urlToFetch = urlFormatted + '&key=AIzaSyD4hjdTRyjcgRDmn1x6NSUK6dQAnNGmhD4'
+
+      $.ajax({
+        url: urlToFetch,
+        success: (response) => {
+          
+          $('#search-container').empty()
+          Object.keys(response.items).map((index) => {
+
+            const item = response.items[index]
+
+            const htmlNode = `<div onclick="loadVideo('${item.id.videoId}')" class="searchResultItem"><div class="searchResultItemImgContainer"><img src=${item.snippet.thumbnails.default.url} alt=""></div><div class="searchResultItemTitle">${item.snippet.title}</div></div>`
+            $('#search-container').append(htmlNode)           
+          })
+        },
+        error: (err) => {
+          console.log('err',err)
         }
-        const onPlayerReady = (event) => {
-            event.target.playVideo()
-        }
-
-        const resumeVideo = () => {
-            youtubePlayer.playVideo()       
-        }
-
-        const pauseVideo = () => {
-            youtubePlayer.pauseVideo()
-        }
-
-        const loadVideo = (id) => {
-            youtubePlayer.loadVideoById(id)
-        }
-
-        const searchYoutube = (loadFirst) => {
-            const query = document.getElementById('query').value
-            const urlFormatted = encodeURI(`https://www.googleapis.com/youtube/v3/search?q=${query}&maxResults=25&part=snippet`)
-            const urlToFetch = urlFormatted + '&key=AIzaSyD4hjdTRyjcgRDmn1x6NSUK6dQAnNGmhD4'
-
-            $.ajax({
-                url: urlToFetch,
-                success: (response) => {
-                    
-                    $('#search-container').empty()
-                    Object.keys(response.items).map((index) => {
-
-                        const item = response.items[index]
-
-                        const htmlNode = `<div onclick="loadVideo('${item.id.videoId}')" class="searchResultItem"><div class="searchResultItemImgContainer"><img src=${item.snippet.thumbnails.default.url} alt=""></div><div class="searchResultItemTitle">${item.snippet.title}</div></div>`
-                        $('#search-container').append(htmlNode)                     
-                    })
-                },
-                error: (err) => {
-                    console.log('err',err)
-                }
-            })
-        }
+      })
+    }
 
 
+    const _states = {
+      idle: 0,
+      loading: 1,
+      enabled: 2,
+      disabled: 3
+    };
+    let _state = _states.idle;
 
-        var _states={
-            idle: 0,
-            loading: 1,
-            enabled: 2,
-            disabled: 3
-        };
-        var _state=_states.idle;
+    function toggle_canvasContainer(isShow){
+      const DOMcanvasContainer = document.getElementById('glanceTrackerCanvasContainer');
+      if (!DOMcanvasContainer) return;
+      DOMcanvasContainer.style.opacity = (isShow) ? '1' : '0';
+    };
 
-        function toggle_canvasContainer(isShow){
-            var DOMcanvasContainer=document.getElementById('glanceTrackerCanvasContainer');
-            if (!DOMcanvasContainer) return;
-            DOMcanvasContainer.style.opacity=(isShow)?'1':'0';
-        };
+    function toggle_glanceTracking(event){ //the user clic on the button
+      switch(_state){
+        case _states.idle:
+          init_glanceTracking();
+          break;
 
-        function toggle_glanceTracking(event){ //the user clic on the button
-            var DOMbutton=event.target;
-            switch(_state){
-                case _states.idle:
-                    init_glanceTracking();
-                    break;
+        case _states.loading:
+          break;
 
-                case _states.loading:
-                    break;
+        case _states.enabled:
+          GLANCETRACKERAPI.toggle_pause(true);
+          toggle_canvasContainer(false);
+          _state = _states.disabled;
+          break;
 
-                case _states.enabled:
-                    GLANCETRACKERAPI.toggle_pause(true);
-                    toggle_canvasContainer(false);
-                    _state=_states.disabled;
-                    break;
+        case _states.disabled:
+          GLANCETRACKERAPI.toggle_pause(false);
+          toggle_canvasContainer(true);
+          _state = _states.enabled;
+          break;
+      }
+      update_button();
+    }; //end toggle_glanceTracking()
 
-                case _states.disabled:
-                    GLANCETRACKERAPI.toggle_pause(false);
-                    toggle_canvasContainer(true);
-                    _state=_states.enabled;
-                    break;
-            }
-            update_button();
-        }; //end toggle_glanceTracking()
+    function update_button(){
+      const DOMbutton = document.getElementById('toggleGlanceTracking');
+      let buttonText = 'undefined';
+      
+      switch(_state){
+        case _states.idle:
+        case _states.disabled:
+          buttonText = 'Enable glance tracking';
+          DOMbutton.style.backgroundColor = 'rgba(12, 189, 43, 1)';
+          break;
 
-        function update_button(){
-            var DOMbutton=document.getElementById('toggleGlanceTracking');
-            var buttonText;
-            
-            switch(_state){
-                case _states.idle:
-                case _states.disabled:
-                    buttonText='Enable glance tracking';
-                    DOMbutton.style.backgroundColor = 'rgba(12, 189, 43, 1)';
-                    break;
+        case _states.loading:
+          buttonText = 'LOADING...';
+          break;
 
-                case _states.loading:
-                    buttonText='LOADING...';
-                    break;
+        case _states.enabled:
+          buttonText = 'Disable glance tracking';
+          DOMbutton.style.backgroundColor = 'lightgrey';
+          break;
+      }
+      DOMbutton.innerHTML = buttonText;
+    }; //end update_button()
 
-                case _states.enabled:
-                    buttonText='Disable glance tracking';
-                    DOMbutton.style.backgroundColor = 'lightgrey';
-                    break;
-            }
-            DOMbutton.innerHTML=buttonText;
-        }; //end update_button()
+    function init_glanceTracking(){
+      _state=_states.loading;
+      GLANCETRACKERAPI.init({
+        callbackTrack: function(isDetected){
+          if (isDetected){
+            resumeVideo()
+            toggle_canvasContainer(false);
+          } else {
+            pauseVideo();
+            toggle_canvasContainer(true);
+          }
+        },
 
-        function init_glanceTracking(){
-            _state=_states.loading;
-            GLANCETRACKERAPI.init({
-                callbackTrack: function(isDetected){
-                    if (isDetected){
-                        resumeVideo()
-                        toggle_canvasContainer(false);
-                    } else {
-                        pauseVideo();
-                        toggle_canvasContainer(true);
-                    }
-                },
+        callbackReady: function(error){
+          if (error){
+            alert('AN ERROR HAPPENS :( CODE ='+error);
+            return;
+          }
+          console.log('GLANCETRACKERAPI is READY YEAH !');
+          _state = _states.enabled;
+          update_button();
+          toggle_canvasContainer(true);
+        },
 
-                callbackReady: function(error){
-                    if (error){
-                        alert('AN ERROR HAPPENS :( CODE ='+error);
-                        return;
-                    }
-                    console.log('GLANCETRACKERAPI is READY YEAH !');
-                    _state=_states.enabled;
-                    update_button();
-                    toggle_canvasContainer(true);
-                },
+        isDisplayVideo: true,
+        canvasId: 'glanceTrackerCanvas',
+        NNCpath: 'https://appstatic.jeeliz.com/glanceTracker/' //where is NNC.json ?
+      }); //end GLANCETRACKERAPI.init call
+    }; //end init()
+    </script>
 
-                isDisplayVideo: true,
-                canvasId: 'glanceTrackerCanvas',
-                NNCpath: 'https://appstatic.jeeliz.com/glanceTracker/' //where is NNC.json ?
-            }); //end GLANCETRACKERAPI.init call
-        }; //end init()
-        </script>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <style type='text/css'>
+      a {color: #7af; text-decoration: none; font-weight: bold}
+      body {
+        background-color: #FAFAFA;
+        margin: 0px;
+        text-align: center;
+        font-family: Helvetica Neu, Arial, sans-serif;
+      }
+      .baseline {
+        color: #444;
+        font-size: 14pt;
+      }
+      .buttonEnable {
+        cursor: pointer;
+        font-size: 16pt;
+        margin: 1em;
+        background: rgba(12, 189, 43, 1);
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
+        color: white;
+        box-shadow: 0 0 3px black;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .buttonEnable:hover {
+        opacity: 0.8;
+      }
+      h1 {
+        font-weight: normal;
+        padding: 20px;
+        font-size: 22pt;
+        border-bottom: solid 1px #444;
+        margin-top: 0;
+        background: #444;
+        color: white;
+        font-family: monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 3px black;
+      }
+      .headerYoutube {
+        margin: 0 10px -1px 20px;
+        font-family: Helvetica Neu, Arial, sans-serif;
+      }
+      .headerYoutube svg {
+        color: #E83324;
+      }
 
-        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-        <style type='text/css'>
-            a {color: #7af; text-decoration: none; font-weight: bold}
-            body {
-                background-color: #FAFAFA;
-                margin: 0px;
-                text-align: center;
-                font-family: Helvetica Neu, Arial, sans-serif;
-            }
-            .baseline {
-                color: #444;
-                font-size: 14pt;
-            }
-            .buttonEnable {
-                cursor: pointer;
-                font-size: 16pt;
-                margin: 1em;
-                background: rgba(12, 189, 43, 1);
-                border: none;
-                border-radius: 3px;
-                padding: 10px;
-                color: white;
-                box-shadow: 0 0 3px black;
-                transition: opacity 0.3s ease-in-out;
-            }
-            .buttonEnable:hover {
-                opacity: 0.8;
-            }
-            h1 {
-                font-weight: normal;
-                padding: 20px;
-                font-size: 22pt;
-                border-bottom: solid 1px #444;
-                margin-top: 0;
-                background: #444;
-                color: white;
-                font-family: monospace;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                box-shadow: 0 0 3px black;
-            }
-            .headerYoutube {
-                margin: 0 10px -1px 20px;
-                font-family: Helvetica Neu, Arial, sans-serif;
-            }
-            .headerYoutube svg {
-                color: #E83324;
-            }
+      #glanceTrackerCanvasContainer {
+        background-color: #666;
+        font-size: 10pt;
+        text-align: center;
+        border: 1px solid white;
+        z-index: 99999999999999999; /*above Youtube fullscreen z-index*/
+        position: fixed; 
+        bottom: 0px;
+        right: 0px;
+        opacity: 0;
+        transition-duration: 1000ms;
+      }
 
-            #glanceTrackerCanvasContainer {
-                background-color: #666;
-                font-size: 10pt;
-                text-align: center;
-                border: 1px solid white;
-                z-index: 99999999999999999; /*above Youtube fullscreen z-index*/
-                position: fixed; 
-                bottom: 0px;
-                right: 0px;
-                opacity: 0;
-                transition-duration: 1000ms;
-            }
+      #glanceTrackerCanvas {  
+        max-width: 25vmin; 
+      }
 
-            #glanceTrackerCanvas {  
-                max-width: 25vmin; 
-            }
+      #jeeVideo {
+        max-width: 100%; /*for mobiles */
+      }
 
-            #jeeVideo {
-                max-width: 100%; /*for mobiles */
-            }
+      #buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
 
-            #buttons {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 20px;
-            }
-
-            .credits {
-                max-width: 640px;
-                text-align: left;
-                display: inline-block;
-                color: #444;
-                font-size: 10pt;
-            }
-            li {
-                white-space: nowrap;
-            } 
-            .playerSelection {
-            padding: 20px;
-            }
-            .playerSelectionTitle {
-            font-size: 15pt;
-            padding-bottom: 10px;
-            }
-            .containerFlex {
-                display: flex;
-                justify-content: center;
-            }
-            .searchSection {
-                width: 50%;
-            }
-            .searchSectionContainer {
-                margin-left: auto;
-                width: 540px;
-                padding: 10px;
-                background: white;
-                height: 340px;
-                border-radius: 3px 3px 0 0;
-            }
-            .playerSection {
-                width: 50%;
-            }
-            #search-button {
-                background: #E83324;
-                color: white;
-                height: 34px;
-                font-size: 11pt;
-                margin-left: 10px;
-                border-radius: 3px;
-                border: none;
-                cursor: pointer;
-                transition: opacity 0.3s ease-in-out;
-            }
-            #search-button:hover {
-                opacity: 0.8;
-            }
-            #search-container {
-                max-height: 280px;
-                margin-left: auto;
-                overflow-y: auto;
-                overflow-x: hidden;
-                padding: 0 20px;
-            }
-            .searchResultItem {
-                display: flex;
-                color: #444;
-                font-size: 10pt;
-                border-bottom: solid 1px #E83324;
-                padding: 10px;
-                background-color: white;
-                cursor: pointer;
-            }
-            .searchResultItemTitle {
-                padding-left: 10px;
-                padding-top: 10px;
-                font-weight: bold;
-                text-align: left;
-            }
-            #query {
-                height: 34px;
-                font-size: 12pt;
-                padding-left: 10px;
-                border-radius: 3px;
-                border: solid 1px lightgrey;
-                min-width: 288px;
-            }
-            .playerPlaceholder {
-                display: flex;
-            }
-            #player {
-                margin-left: 20px;
-            }
-            h2 {
-                margin-left: 20px;
-                margin-top: 0;
-            }
-        </style>
-    </head>
+      .credits {
+        max-width: 640px;
+        text-align: left;
+        display: inline-block;
+        color: #444;
+        font-size: 10pt;
+      }
+      li {
+        white-space: nowrap;
+      } 
+      .playerSelection {
+      padding: 20px;
+      }
+      .playerSelectionTitle {
+      font-size: 15pt;
+      padding-bottom: 10px;
+      }
+      .containerFlex {
+        display: flex;
+        justify-content: center;
+      }
+      .searchSection {
+        width: 50%;
+      }
+      .searchSectionContainer {
+        margin-left: auto;
+        width: 540px;
+        padding: 10px;
+        background: white;
+        height: 340px;
+        border-radius: 3px 3px 0 0;
+      }
+      .playerSection {
+        width: 50%;
+      }
+      #search-button {
+        background: #E83324;
+        color: white;
+        height: 34px;
+        font-size: 11pt;
+        margin-left: 10px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+      }
+      #search-button:hover {
+        opacity: 0.8;
+      }
+      #search-container {
+        max-height: 280px;
+        margin-left: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 20px;
+      }
+      .searchResultItem {
+        display: flex;
+        color: #444;
+        font-size: 10pt;
+        border-bottom: solid 1px #E83324;
+        padding: 10px;
+        background-color: white;
+        cursor: pointer;
+      }
+      .searchResultItemTitle {
+        padding-left: 10px;
+        padding-top: 10px;
+        font-weight: bold;
+        text-align: left;
+      }
+      #query {
+        height: 34px;
+        font-size: 12pt;
+        padding-left: 10px;
+        border-radius: 3px;
+        border: solid 1px lightgrey;
+        min-width: 288px;
+      }
+      .playerPlaceholder {
+        display: flex;
+      }
+      #player {
+        margin-left: 20px;
+      }
+      h2 {
+        margin-left: 20px;
+        margin-top: 0;
+      }
+    </style>
+  </head>
 
 
-    <body onload='update_button();searchYoutube(true);' style='color: white'>
-        <h1>Jeeliz Glance Tracker: <div class="headerYoutube"><i class="fab fa-youtube"></i> Youtube</div>integration demo</h1>
-        <div class="baseline">With the glance tracking, the video pauses when you look away.</div>
-        <button class="buttonEnable" onclick='toggle_glanceTracking(event)' id='toggleGlanceTracking'></button><br/>
-        <div class="containerFlex">
-            <div class="searchSection">
-                <div class="searchSectionContainer">
-                    <div id="buttons">
-                        <input id="query" value='dogs' type="text" />
-                        <button onclick='searchYoutube()' id="search-button">Search</button>
-                    </div>
-                    <div id="search-container">
-                    </div>                    
-                </div>
-            </div>
-            <div class="playerSection">
-                <div id='playerPlaceholder' class="playerPlaceholder">
-                <div id="player"></div>            
-                </div>              
-            </div>
+  <body onload='update_button();searchYoutube(true);' style='color: white'>
+    <h1>Jeeliz Glance Tracker: <div class="headerYoutube"><i class="fab fa-youtube"></i> Youtube</div>integration demo</h1>
+    <div class="baseline">With the glance tracking, the video pauses when you look away.</div>
+    <button class="buttonEnable" onclick='toggle_glanceTracking(event)' id='toggleGlanceTracking'></button><br/>
+    <div class="containerFlex">
+      <div class="searchSection">
+        <div class="searchSectionContainer">
+          <div id="buttons">
+            <input id="query" value='dogs' type="text" />
+            <button onclick='searchYoutube()' id="search-button">Search</button>
+          </div>
+          <div id="search-container">
+          </div>          
         </div>
+      </div>
+      <div class="playerSection">
+        <div id='playerPlaceholder' class="playerPlaceholder">
+        <div id="player"></div>      
+        </div>        
+      </div>
+    </div>
 
 
-        <br/><div class='credits'>
-        <h2>Credits</h2>
-        <ul>
-            <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
-            <li>Github of the project : <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
-        </ul>
-        </div>
+    <br/><div class='credits'>
+    <h2>Credits</h2>
+    <ul>
+      <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
+      <li>Github of the project : <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
+    </ul>
+    </div>
 
-        <div id='glanceTrackerCanvasContainer'>
-            &nbsp;Tracking your glance ...<br/>
-            <canvas id='glanceTrackerCanvas'></canvas>
-        </div>
-    </body>
+    <div id='glanceTrackerCanvasContainer'>
+      &nbsp;Tracking your glance ...<br/>
+      <canvas id='glanceTrackerCanvas'></canvas>
+    </div>
+  </body>
 </html>
 
