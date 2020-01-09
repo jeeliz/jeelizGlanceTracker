@@ -14,13 +14,13 @@
 
     "use strict"
 
-    const _states={
+    const _states = {
       idle: 0,
       loading: 1,
       enabled: 2,
       disabled: 3
     };
-    var _state = _states.idle;
+    let _state = _states.idle;
 
     function toggle_canvasContainer(isShow){
       const DOMcanvasContainer = document.getElementById('glanceTrackerCanvasContainer');
@@ -38,13 +38,13 @@
           break;
 
         case _states.enabled:
-          GLANCETRACKERAPI.toggle_pause(true);
+          GLANCETRACKERAPI.toggle_pause(true, true);
           toggle_canvasContainer(false);
           _state = _states.disabled;
           break;
 
         case _states.disabled:
-          GLANCETRACKERAPI.toggle_pause(false);
+          GLANCETRACKERAPI.toggle_pause(false, true);
           toggle_canvasContainer(true);
           _state = _states.enabled;
           break;

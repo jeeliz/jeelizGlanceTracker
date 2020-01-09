@@ -33,7 +33,7 @@ This repository is composed of the following paths:
 In the HTML page, you first need to include the main script between the tags `<head>` and `</head>`:
 
 ```html
- <script type="text/javascript" src="dist/jeelizGlanceTracker.js"></script>
+ <script src="dist/jeelizGlanceTracker.js"></script>
 ```
 
 Then you should include a `<canvas>` HTML element in the DOM, between the tags `<body>` and `</body>`:
@@ -47,58 +47,58 @@ As soon as the page is loaded or when you want to enable the glance tracking fea
 
 ```javascript
 GLANCETRACKERAPI.init({
-    // MANDATORY:
-    // callback launched when:
-    //  * the user is watching (isWatching=true) 
-    //  * or when he stops watching (isWatching=false)
-    // it can be used to play/pause a video
-    callbackTrack: function(isWatching){
-        if (isWatching){
-        	console.log('Hey, you are watching bro');
-    	} else {
-    		console.log('You are not watching anymore :(');
-    	}
-    },
+  // MANDATORY:
+  // callback launched when:
+  //  * the user is watching (isWatching=true) 
+  //  * or when he stops watching (isWatching=false)
+  // it can be used to play/pause a video
+  callbackTrack: function(isWatching){
+      if (isWatching){
+      	console.log('Hey, you are watching bro');
+  	} else {
+  		console.log('You are not watching anymore :(');
+  	}
+  },
 
-    // FACULTATIVE (default: none):
-    // callback launched when then Jeeliz Glance Tracker is ready
-    // or if there was an error
-    // spec is an object with these attributes:
-    //   * <video> video: the video element
-    //   * <WebGLContext> GL: the webgl context
-    //   * <WebGLTexture> videoTexture: WebGL texture storing the webcam video
-    //   * <WebGLTexture> videoTextureCut: WebGL texture storing the cropped face
-    callbackReady: function(error, spec){
-        if (error){
-            console.log('EN ERROR happens', error);
-            return;
-        }
-        console.log('All is well :)');
-    },
+  // FACULTATIVE (default: none):
+  // callback launched when then Jeeliz Glance Tracker is ready
+  // or if there was an error
+  // spec is an object with these attributes:
+  //   * <video> video: the video element
+  //   * <WebGLContext> GL: the webgl context
+  //   * <WebGLTexture> videoTexture: WebGL texture storing the webcam video
+  //   * <WebGLTexture> videoTextureCut: WebGL texture storing the cropped face
+  callbackReady: function(error, spec){
+      if (error){
+          console.log('EN ERROR happens', error);
+          return;
+      }
+      console.log('All is well :)');
+  },
 
-    //FACULTATIVE (default: true):
-    //true if we display the video of the user
-    //with the face detection area on the <canvas> element
-    isDisplayVideo: true,
+  //FACULTATIVE (default: true):
+  //true if we display the video of the user
+  //with the face detection area on the <canvas> element
+  isDisplayVideo: true,
 
-    // MANDATORY:
-    // id of the <canvas> HTML element
-    canvasId: 'glanceTrackerCanvas',
+  // MANDATORY:
+  // id of the <canvas> HTML element
+  canvasId: 'glanceTrackerCanvas',
 
-    // FACULTATIVE (default: internal)
-    // sensibility to the head vertical axis rotation
-    // float between 0 and 1: 
-    // * if 0, very sensitive, the user is considered as not watching
-    //   if he slightly turns his head,
-    // * if 1, not very sensitive: the user has to turn the head a lot
-    //   to loose the detection. 
-    sensibility: 0.5,
+  // FACULTATIVE (default: internal)
+  // sensibility to the head vertical axis rotation
+  // float between 0 and 1: 
+  // * if 0, very sensitive, the user is considered as not watching
+  //   if he slightly turns his head,
+  // * if 1, not very sensitive: the user has to turn the head a lot
+  //   to loose the detection. 
+  sensibility: 0.5,
 
-    // FACULTATIVE (default: current directory)
-    // should be given without the NNC.json
-    // and ending by /
-    // for example ../../
-    NNCpath: '/path/of/NNC.json'
+  // FACULTATIVE (default: current directory)
+  // should be given without the NNC.json
+  // and ending by /
+  // for example ../../
+  NNCpath: '/path/of/NNC.json'
 });
 ```
 
@@ -108,7 +108,7 @@ After the initialization, these methods are available:
 
 * `GLANCETRACKERAPI.set_sensibility(<float> sensibility)`: adjust the sensibility (between 0 and 1),
 
-* `GLANCETRACKERAPI.toggle_pause(<boolean> isPause)`: pause/resume the face tracking,
+* `GLANCETRACKERAPI.toggle_pause(<boolean> isPause, <boolean> shutCamera)`: pause/resume the face tracking. if `shutCamera` is set to `true`, it will also turn off the camera light. It returns a promise,
 
 * `GLANCETRACKERAPI.toggle_display(<boolean> isDisplay)`: toggle the display of the video with the face detection area on the HTML `<canvas>` element. It is better to disable the display if the canvas element is hidden (using CSS for example). It will save some GPU resources.
 
