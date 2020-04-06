@@ -112,6 +112,8 @@ After the initialization, these methods are available:
 
 * `GLANCETRACKERAPI.toggle_display(<boolean> isDisplay)`: toggle the display of the video with the face detection area on the HTML `<canvas>` element. It is better to disable the display if the canvas element is hidden (using CSS for example). It will save some GPU resources.
 
+* `GLANCETRACKERAPI.destroy()`: Clean both graphic memory and JavaScript memory, uninit the library. After that you need to init the library again.
+
 
 You should use them after initialization, ie:
 
