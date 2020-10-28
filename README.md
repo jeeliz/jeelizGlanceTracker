@@ -98,7 +98,7 @@ GLANCETRACKERAPI.init({
   // should be given without the NNC.json
   // and ending by /
   // for example ../../
-  NNCpath: '/path/of/NNC.json'
+  NNCPath: '/path/of/NNC.json'
 });
 ```
 

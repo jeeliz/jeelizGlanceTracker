@@ -1,6 +1,6 @@
 "use strict"
 
-const _states={
+const _states = {
   error: -2,
   notLoaded: -1,
   loading: 0,
@@ -8,7 +8,7 @@ const _states={
 };
 let _state = _states.notLoaded;
 let _isFaceDetected = false;
-let _glVideoTextureCut, _glVideoTexture, _gl, _glFBO, _glDrawTarget;
+let _glVideoTextureCut = null, _glVideoTexture = null, _gl = null, _glFBO = null, _glDrawTarget = null;
 let _adjustTimer = false;
 let _relaxationFactor = 0.05;
 let _last_t = Date.now();
@@ -54,7 +54,7 @@ function init_glanceTracking(){
     sensibility: 0.3,
     isDisplayVideo: true,
     canvasId: 'glanceTrackerCanvas',
-    NNCpath: '../../dist/' //where is NNC.json ?
+    NNCPath: '../../dist/' //where is NNC.json ?
   }); //end GLANCETRACKERAPI.init call
 }; //end init()
 
