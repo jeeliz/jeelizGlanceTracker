@@ -8,7 +8,7 @@
     <title>GLANCE TRACKER - INTEGRATION DEMO</title>
     
     <!-- WE INCLUDE THE MAIN SCRIPT -->
-    <script src="https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js"></script>
+    <script src="../../dist/jeelizGlanceTracker.js"></script>
 
     <script>
 
@@ -28,7 +28,7 @@
       DOMcanvasContainer.style.opacity = (isShow) ? '1' : '0';
     };
 
-    function toggle_glanceTracking(event){ //the user clic on the button
+    function toggle_glanceTracking(event){ // the user clic on the button
       switch(_state){
         case _states.idle:
           init_glanceTracking();
@@ -77,7 +77,7 @@
       _state = _states.loading;
       GLANCETRACKERAPI.init({
         callbackTrack: function(isDetected){
-          console.log('DETECTION changed ! isDetected = ', isDetected);
+          console.log('DETECTION changed! isDetected = ', isDetected);
           const DOMvideo = document.getElementById('jeeVideo');
           if (!DOMvideo) return;
           if (isDetected){
@@ -91,7 +91,7 @@
 
         callbackReady: function(error){
           if (error){
-            alert('AN ERROR HAPPENS :( CODE ='+error);
+            alert('AN ERROR HAPPENS :( CODE =' + error);
             return;
           }
           console.log('GLANCETRACKERAPI is READY YEAH !');
@@ -102,7 +102,7 @@
 
         isDisplayVideo: true,
         canvasId: 'glanceTrackerCanvas',
-        NNCPath: 'https://appstatic.jeeliz.com/glanceTracker/' //where is NNC.json ?
+        NNCPath: '../../dist/' //where is NNC.json ?
       }); //end GLANCETRACKERAPI.init call
     }; //end init()
 
@@ -170,9 +170,9 @@
     <br/><div class='credits'>
     <h2>Credits</h2>
     <ul>
-      <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
-      <li>Github of the project : <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
-      <li>Video used for this demo : Big Buck Bunny by the <a href='https://www.blender.org' target='_blank'>Blender Foundation</a>
+      <li>JEELIZ: Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter: <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
+      <li>Github of the project: <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
+      <li>Video used for this demo: Big Buck Bunny by the <a href='https://www.blender.org' target='_blank'>Blender Foundation</a>
     </ul>
     </div>
 

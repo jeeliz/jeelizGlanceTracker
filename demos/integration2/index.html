@@ -8,12 +8,12 @@
     <title>GLANCE TRACKER - INTEGRATION DEMO</title>
     
     <!-- WE INCLUDE THE MAIN SCRIPT -->
-    <script src="https://appstatic.jeeliz.com/glanceTracker/jeelizGlanceTracker.js"></script>
+    <script src="../../dist/jeelizGlanceTracker.js"></script>
 
     <script>
 
     "use strict"
-    const _states={
+    const _states = {
       idle: 0,
       loading: 1,
       enabled: 2,
@@ -95,7 +95,7 @@
             alert('AN ERROR HAPPENS :( CODE ='+error);
             return;
           }
-          console.log('GLANCETRACKERAPI is READY YEAH !');
+          console.log('GLANCETRACKERAPI is READY YEAH!');
           _state = _states.enabled;
           update_button();
           toggle_canvasContainer(true);
@@ -103,7 +103,7 @@
 
         isDisplayVideo: true,
         canvasId: 'glanceTrackerCanvas',
-        NNCPath: 'https://appstatic.jeeliz.com/glanceTracker/' //where is NNC.json ?
+        NNCPath: '../../dist/' // where is NNC.json ?
       }); //end GLANCETRACKERAPI.init call
     }; //end init()
 
@@ -187,9 +187,9 @@
     <br/><div class='credits'>
     <h2>Credits</h2>
     <ul>
-      <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
-      <li>Github of the project : <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
-      <li>Video used for this demo : Big Buck Bunny by the <a href='https://www.blender.org' target='_blank'>Blender Foundation</a>
+      <li>JEELIZ: Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter: <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
+      <li>Github of the project: <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
+      <li>Video used for this demo: Big Buck Bunny by the <a href='https://www.blender.org' target='_blank'>Blender Foundation</a>
     </ul>
     </div>
 

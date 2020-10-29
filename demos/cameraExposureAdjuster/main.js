@@ -35,7 +35,7 @@ function init_glanceTracking(){
   _state = _states.loading;
   GLANCETRACKERAPI.init({
     callbackTrack: function(isDetected){
-      console.log('DETECTION changed ! isDetected = ', isDetected);
+      console.log('DETECTION changed! isDetected = ', isDetected);
       _isFaceDetected = isDetected;
     },
 
