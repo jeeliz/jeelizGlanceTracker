@@ -110,13 +110,13 @@
           break;
 
         case _states.enabled:
-          GLANCETRACKERAPI.toggle_pause(true, true);
+          JEELIZGLANCETRACKER.toggle_pause(true, true);
           toggle_canvasContainer(false);
           _state = _states.disabled;
           break;
 
         case _states.disabled:
-          GLANCETRACKERAPI.toggle_pause(false, true);
+          JEELIZGLANCETRACKER.toggle_pause(false, true);
           toggle_canvasContainer(true);
           _state = _states.enabled;
           break;
@@ -149,7 +149,7 @@
 
     function init_glanceTracking(){
       _state=_states.loading;
-      GLANCETRACKERAPI.init({
+      JEELIZGLANCETRACKER.init({
         callbackTrack: function(isDetected){
           if (isDetected){
             resumeVideo()
@@ -165,7 +165,7 @@
             alert('AN ERROR HAPPENS :( CODE ='+error);
             return;
           }
-          console.log('GLANCETRACKERAPI is READY YEAH !');
+          console.log('JEELIZGLANCETRACKER is READY YEAH !');
           _state = _states.enabled;
           update_button();
           toggle_canvasContainer(true);
@@ -174,7 +174,7 @@
         isDisplayVideo: true,
         canvasId: 'glanceTrackerCanvas',
         NNCPath: '../../dist/' // where is NNC.json ?
-      }); //end GLANCETRACKERAPI.init call
+      }); //end JEELIZGLANCETRACKER.init call
     }; //end init()
     </script>
 
@@ -375,7 +375,7 @@
     <br/><div class='credits'>
     <h2>Credits</h2>
     <ul>
-      <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/StartupJeeliz' target='_blank'>@StartupJeeliz</a>
+      <li>JEELIZ : Deep learning networks in browser - <a href='https://jeeliz.com' target='_blank'>jeeliz.com</a> - Twitter : <a href='https://twitter.com/Jeeliz_AR' target='_blank'>@Jeeliz_AR</a>
       <li>Github of the project : <a href='https://github.com/jeeliz/jeelizGlanceTracker' target='_blank'>jeeliz/jeelizGlanceTracker</a>
     </ul>
     </div>

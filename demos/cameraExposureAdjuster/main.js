@@ -33,7 +33,7 @@ function on_error(errCode){
 
 function init_glanceTracking(){
   _state = _states.loading;
-  GLANCETRACKERAPI.init({
+  JEELIZGLANCETRACKER.init({
     callbackTrack: function(isDetected){
       console.log('DETECTION changed! isDetected = ', isDetected);
       _isFaceDetected = isDetected;
@@ -46,16 +46,16 @@ function init_glanceTracking(){
         return;
       }
       
-      console.log('GLANCETRACKERAPI is READY YEAH !');
+      console.log('JEELIZGLANCETRACKER is READY YEAH !');
       init_exposureController(specInit);
-      GLANCETRACKERAPI.toggle_pause(true);
+      JEELIZGLANCETRACKER.toggle_pause(true);
     },
 
     sensibility: 0.3,
     isDisplayVideo: true,
     canvasId: 'glanceTrackerCanvas',
     NNCPath: '../../dist/' //where is NNC.json ?
-  }); //end GLANCETRACKERAPI.init call
+  }); //end JEELIZGLANCETRACKER.init call
 }; //end init()
 
 function init_exposureController(spec){
@@ -89,7 +89,7 @@ function init_exposureController(spec){
 
 function start_adjusting(){
   console.log('START ADJUSTING...');
-  GLANCETRACKERAPI.toggle_pause(false);
+  JEELIZGLANCETRACKER.toggle_pause(false);
   //ok, now as soon as we detect the face
   //we toggle to camera exposure manual mode
   //and we start exposure adjustment

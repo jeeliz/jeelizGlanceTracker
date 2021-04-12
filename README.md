@@ -30,6 +30,7 @@ This repository is composed of the following paths:
 
 
 ## Integration
+
 In the HTML page, you first need to include the main script between the tags `<head>` and `</head>`:
 
 ```html
@@ -46,7 +47,7 @@ This canvas will be used by WebGL for the computation and the display of the web
 As soon as the page is loaded or when you want to enable the glance tracking feature you should call this function:
 
 ```javascript
-GLANCETRACKERAPI.init({
+JEELIZGLANCETRACKER.init({
   // MANDATORY:
   // callback launched when:
   //  * the user is watching (isWatching=true) 
@@ -104,29 +105,33 @@ GLANCETRACKERAPI.init({
 
 
 ## Other methods
+
 After the initialization, these methods are available:
 
-* `GLANCETRACKERAPI.set_sensibility(<float> sensibility)`: adjust the sensibility (between 0 and 1),
+* `JEELIZGLANCETRACKER.set_sensibility(<float> sensibility)`: adjust the sensibility (between 0 and 1),
 
-* `GLANCETRACKERAPI.toggle_pause(<boolean> isPause, <boolean> shutCamera)`: pause/resume the face tracking. if `shutCamera` is set to `true`, it will also turn off the camera light. It returns a promise,
+* `JEELIZGLANCETRACKER.toggle_pause(<boolean> isPause, <boolean> shutCamera)`: pause/resume the face tracking. if `shutCamera` is set to `true`, it will also turn off the camera light. It returns a promise,
 
-* `GLANCETRACKERAPI.toggle_display(<boolean> isDisplay)`: toggle the display of the video with the face detection area on the HTML `<canvas>` element. It is better to disable the display if the canvas element is hidden (using CSS for example). It will save some GPU resources.
+* `JEELIZGLANCETRACKER.toggle_display(<boolean> isDisplay)`: toggle the display of the video with the face detection area on the HTML `<canvas>` element. It is better to disable the display if the canvas element is hidden (using CSS for example). It will save some GPU resources.
 
-* `GLANCETRACKERAPI.destroy()`: Clean both graphic memory and JavaScript memory, uninit the library. After that you need to init the library again.
+* `JEELIZGLANCETRACKER.destroy()`: Clean both graphic memory and JavaScript memory, uninit the library. After that you need to init the library again.
 
 
 You should use them after initialization, ie:
 
 * either after that `callbackReady` function provided as initialization argument is launched (better),
-* or when the boolean property `GLANCETRACKERAPI.ready` switches to `true`.
+* or when the boolean property `JEELIZGLANCETRACKER.ready` switches to `true`.
 
 
 
 ## Hosting
-### HTTPS only !
+
+### HTTPS only!
+
 The tracker requires the user's webcam video feed through `MediaStream API`. So your application should be hosted with a HTTPS server (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally with some web browsers.
 
 ### The scripts
+
 You can use our hosted and up to date version of the library, available here:
 
 ```
@@ -139,6 +144,7 @@ If you host the scripts by yourself, be careful to enable gzip HTTP/HTTPS compre
 
 
 ## About the tech
+
 ### Under the hood
 This API uses Jeeliz WebGL Deep Learning technology to detect and track the user's face using a neural network. All is done client-side.
 
@@ -160,18 +166,12 @@ If a compatibility error is triggered, please post an issue on this repository. 
 
 
 ## License
+
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). This application is free for both commercial and non-commercial use.
 
 We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great.
 
 
-
-## See also
-Jeeliz main face detection and tracking library is called [Jeeliz FaceFilter API](https://github.com/jeeliz/jeelizFaceFilter). It handles multi-face detection, and for each tracked face it provides the rotation angles and the mouth opening factor. It is perfect to build your own Snapchat/MSQRD like face filters running in the browser. It comes with dozen of integration demo, including a face swap.
-
-If you want to use this library for glasses virtual try-on (sunglasses, spectacles, ski masks), you can take a look at [Jeeliz VTO widget](https://github.com/jeeliz/jeelizGlassesVTOWidget). It includes a high quality and lightweight 3D engine which implements the following features: deferred shading, PBR, raytraced shadows, normal mapping, ... It also reconstructs the lighting environment around the user (ambient and directional lighting). But the glasses comes from a database hosted in our servers. If you want to add some models, please contact us.
-
-
-
 ## References
+
 * [Jeeliz official website](https://jeeliz.com)
