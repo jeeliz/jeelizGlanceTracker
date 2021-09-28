@@ -1,4 +1,4 @@
-# jeelizGlanceTracker
+# Jeeliz Glance Tracker
 
 This JavaScript/WebGL library detects if the user is looking at the screen or not. It is very robust to all lighting conditions and lightweight (only 150KB gzipped for the main script and the neural network JSON model). It is great for playing a video only if the user is watching it.
 
@@ -11,7 +11,7 @@ You can test it with these demos (included in this repo):
 * Old and ugly integration demo: [live demo](https://jeeliz.com/demos/glanceTracker/demos/integration), [source code](/demos/integration)
 * Camera auto exposure adjuster: [live demo](https://jeeliz.com/demos/glanceTracker/demos/cameraExposureAdjuster), [source code](/demos/cameraExposureAdjuster)
 
-If you do not have a webcam yet, this is a video screenshot of the *Youtube integration demo*:
+This is a video screenshot of the *Youtube integration demo*:
 
 <p align="center">
 <a href='https://www.youtube.com/watch?v=2FWcsA8QrHU'><img src='https://img.youtube.com/vi/2FWcsA8QrHU/0.jpg'></a>
@@ -43,7 +43,7 @@ Then you should include a `<canvas>` HTML element in the DOM, between the tags `
 <canvas id='glanceTrackerCanvas'></canvas>
 ```
 
-This canvas will be used by WebGL for the computation and the display of the webcam video with the face detection frame. It can be hidden using CSS rules.
+This canvas will be used by WebGL for the computation and the display of the camera video with the face detection frame. It can be hidden using CSS rules.
 As soon as the page is loaded or when you want to enable the glance tracking feature you should call this function:
 
 ```javascript
@@ -54,11 +54,11 @@ JEELIZGLANCETRACKER.init({
   //  * or when he stops watching (isWatching=false)
   // it can be used to play/pause a video
   callbackTrack: function(isWatching){
-      if (isWatching){
-      	console.log('Hey, you are watching bro');
-  	} else {
-  		console.log('You are not watching anymore :(');
-  	}
+    if (isWatching){
+      console.log('Hey, you are watching bro');
+    } else {
+      console.log('You are not watching anymore :(');
+    }
   },
 
   // FACULTATIVE (default: none):
@@ -67,14 +67,14 @@ JEELIZGLANCETRACKER.init({
   // spec is an object with these attributes:
   //   * <video> video: the video element
   //   * <WebGLContext> GL: the webgl context
-  //   * <WebGLTexture> videoTexture: WebGL texture storing the webcam video
+  //   * <WebGLTexture> videoTexture: WebGL texture storing the camera video
   //   * <WebGLTexture> videoTextureCut: WebGL texture storing the cropped face
   callbackReady: function(error, spec){
-      if (error){
-          console.log('EN ERROR happens', error);
-          return;
-      }
-      console.log('All is well :)');
+    if (error){
+      console.log('EN ERROR happens', error);
+      return;
+    }
+    console.log('All is well :)');
   },
 
   //FACULTATIVE (default: true):
@@ -128,7 +128,7 @@ You should use them after initialization, ie:
 
 ### HTTPS only!
 
-The tracker requires the user's webcam video feed through `MediaStream API`. So your application should be hosted with a HTTPS server (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally with some web browsers.
+The tracker requires the user's camera video feed through `MediaStream API`. So your application should be hosted with a HTTPS server (even with a self-signed certificate). It won't work at all with unsecure HTTP, even locally with some web browsers.
 
 ### The scripts
 
@@ -154,9 +154,9 @@ This API uses Jeeliz WebGL Deep Learning technology to detect and track the user
 * If `WebGL2` is not available but `WebGL1`, we require either `OES_TEXTURE_FLOAT` extension or `OES_TEXTURE_HALF_FLOAT` extension,
 * If `WebGL2` is not available, and if `WebGL1` is not available or neither `OES_TEXTURE_FLOAT` or `OES_HALF_TEXTURE_FLOAT` are implemented, the user is not compatible.
 
-In all cases, WebRTC should be implemented in the web browser, otherwise FaceFilter API will not be able to get the webcam video feed. Here are the compatibility tables from [caniuse.com](https://caniuse.com/) here: [WebGL1](https://caniuse.com/#feat=webgl), [WebGL2](https://caniuse.com/#feat=webgl2), [WebRTC](https://caniuse.com/#feat=stream).
+In all cases, WebRTC should be implemented in the web browser, otherwise FaceFilter API will not be able to get the camera video feed. Here are the compatibility tables from [caniuse.com](https://caniuse.com/) here: [WebGL1](https://caniuse.com/#feat=webgl), [WebGL2](https://caniuse.com/#feat=webgl2), [WebRTC](https://caniuse.com/#feat=stream).
 
-If a compatibility error is triggered, please post an issue on this repository. If this is a problem with the webcam access, please first retry after closing all applications which could use your device (Skype, Messenger, other browser tabs and windows, ...). Please include:
+If a compatibility error is triggered, please post an issue on this repository. If this is a problem with the camera access, please first retry after closing all applications which could use your device (Skype, Messenger, other browser tabs and windows, ...). Please include:
 
 * a screenshot of [webglreport.com - WebGL1](http://webglreport.com/?v=1) (about your `WebGL1` implementation),
 * a screenshot of [webglreport.com - WebGL2](http://webglreport.com/?v=2) (about your `WebGL2` implementation),
@@ -169,7 +169,6 @@ If a compatibility error is triggered, please post an issue on this repository. 
 
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html). This application is free for both commercial and non-commercial use.
 
-We appreciate attribution by including the [Jeeliz logo](https://jeeliz.com/wp-content/uploads/2018/01/LOGO_JEELIZ_BLUE.png) and a link to the [Jeeliz website](https://jeeliz.com) in your application or desktop website. Of course we do not expect a large link to Jeeliz over your face filter, but if you can put the link in the credits/about/help/footer section it would be great.
 
 
 ## References
